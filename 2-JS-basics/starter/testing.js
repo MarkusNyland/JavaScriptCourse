@@ -4,3 +4,4 @@ var calculageAge = function (year) {
 };
 
 console.log(calculageAge(1996));
+console.log(calculageAge(1990));
