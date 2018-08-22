@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var activePlayer, scores, roundScore, gamePlaying;
+var activePlayer, scores, roundScore, gamePlaying, lastRolledDice;
 
 resetGame();
 
@@ -22,14 +22,21 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
         diceDOM.style.display = 'block';
         diceDOM.src = 'dice-' + dice + '.png';
 
-        if (dice !== 1){
+        if (dice === 1) {
+            nextPlayer();
+        }
+
+        else if (dice===lastRolledDice && dice===6) {
+            scores[activePlayer] = 0;
+            document.getElementById('score-' + activePlayer).textContent = scores[activePlayer];
+            alert(dice + '' + lastRolledDice);
+            nextPlayer();
+        }
+
+        else {
+            lastRolledDice = dice;
             roundScore += dice;
             document.getElementById('current-' + activePlayer).textContent = roundScore;
-        }
-        else {
-
-            nextPlayer();
-
         }
     }
 
@@ -63,6 +70,8 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
 document.querySelector('.btn-new').addEventListener('click', resetGame);
 
 function nextPlayer() {
+
+    lastRolledDice = 0;
     document.getElementById('current-' + activePlayer).textContent = '0';
 
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
@@ -80,6 +89,7 @@ function resetGame() {
     roundScore = 0;
     activePlayer = 0;
     gamePlaying = true;
+    lastRolledDice = 0;
 
     document.querySelector('.dice').style.display = 'none';
 
