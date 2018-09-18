@@ -128,4 +128,8 @@ $RECYCLE.BIN/
 *.lnk
 
 
-# End of https://www.gitignore.io/api/macos,windows,intellij
+# End of https://www.gitignore.io/api/macos,windows,intellij/node_modules/
+./node_modules
+*/node_modules
+*/node_modules/
+node_modules/
